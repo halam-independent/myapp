@@ -1,6 +1,6 @@
 #!/bin/bash
 <<EOF
-cd /home/test/myapp
+cd /home/test/myap
 git pull
 npm install --production
 pm2 restart all
