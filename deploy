@@ -2,7 +2,7 @@
 <<EOF
 cd /home/test/myapp
 git pull
-npm install --production
+npm start
 pm2 restart all
 exit
 EOF
