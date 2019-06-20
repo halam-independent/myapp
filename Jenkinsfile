@@ -1,19 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
+        stage ('Build') {
+            steps{
                 cd /home/tests/myapp
                 npm install
                 npm start
             }
         }
-        stage('DeployToStaging') {
+        stage ('DeployToStaging') {
             when {
                 branch 'master'
             }
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+            steps{
+                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     sshPublisher(
                         failOnError: true,
                         continueOnError: false,
@@ -30,11 +30,11 @@ pipeline {
                 }
             }
         }
-        stage('DeployToProduction') {
+        stage ('DeployToProduction') {
             when {
                 branch 'master'
             }
-            steps {
+            steps{
                 input 'Does the staging environment look OK?'
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
