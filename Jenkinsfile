@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
         stage ('Build') {
-            steps{
+            steps {
                 cd /home/tests/myapp
                 npm install
                 npm start
